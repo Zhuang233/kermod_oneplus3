@@ -25,25 +25,19 @@ enum OPERATIONS {
 
 typedef struct
 {
-    int a;
-    char b;
-    float c;
-}data1_t;
+    int pid;// 目标进程
+    unsigned int addr;// 读取的地址
+    void * buf_read_addr;// 用户空间读取的缓冲区指针
+    int size;// 读取字节数
+}memread_t;
 
-typedef struct
-{
-    unsigned int len;
-    data1_t data;
-}origin_data_t;
 
-origin_data_t origin_data;
+memread_t memread;
+
+unsigned char buf_read[1024] = {0};
 
 int main(){
-    origin_data.len = sizeof(data1_t);
-    printf("size of data1_t:%d\n",origin_data.len);
-    origin_data.data.a = 15527;
-    origin_data.data.b = 'a';
-    origin_data.data.c = 1.23;
+    printf("size of memread_t:%d\n",sizeof(memread));
 
     int fd = 0;
     fd = open(DEVICE_NAME, O_RDONLY);
@@ -55,9 +49,19 @@ int main(){
         printf("[+] open driver sucess\n");
     }
 
-    if(ioctl(fd, READ_PROC_MEM, &origin_data) != 0) {
+    memread.buf_read_addr = buf_read;
+
+    printf("input pid addr size\n");
+    scanf("%d %d %d", &memread.pid, &memread.addr, &memread.size);
+
+
+    if(ioctl(fd, READ_PROC_MEM, &memread) != 0) {
         printf("ioctl err");
         return 0;
+    }
+
+    for(int i=0; i < memread.size; i++){
+        printf("%x",buf_read[i]);
     }
 
     close(fd);
