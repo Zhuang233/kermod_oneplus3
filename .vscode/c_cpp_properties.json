@@ -4,15 +4,18 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/home/zbw/Desktop/android_kernel_oneplus_msm8996/include",
                 "/home/zbw/Desktop/android_kernel_oneplus_msm8996/arch/arm64/include",
+                "/home/zbw/Desktop/android_kernel_oneplus_msm8996/include",
                 "/home/zbw/Desktop/android_kernel_oneplus_msm8996/out/include",
                 "/home/zbw/Desktop/android_kernel_oneplus_msm8996/include/uapi"
 
             ],
             "defines": [
             "__GNUC__",
-            "__KERNEL__"]
+            "__KERNEL__",
+            "CONFIG_PGTABLE_LEVELS=3",
+            "CONFIG_ARM64_VA_BITS=39"
+            ]
         }
     ],
     "version": 4

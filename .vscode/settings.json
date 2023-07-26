@@ -4,6 +4,9 @@
         "string_view": "c",
         "initializer_list": "c",
         "utility": "c",
-        "data_type.h": "c"
+        "data_type.h": "c",
+        "slab.h": "c",
+        "pgtable-types.h": "c",
+        "pgtable.h": "c"
     }
 }
