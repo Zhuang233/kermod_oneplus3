@@ -1,4 +1,6 @@
-obj-m := hello.o 
+obj-m += hello.o 
+obj-m += rwProc.o
+obj-m += zbwDevice.o 
 
 
 CROSS_COMPILE=/home/zbw/Desktop/aarch64-linux-gnu/bin/aarch64-linux-gnu-
