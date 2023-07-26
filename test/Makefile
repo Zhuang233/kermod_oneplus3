@@ -1,8 +1,5 @@
-obj-m += hello.o 
-obj-m += rwProc.o
-obj-m += zbwDevice_exe.o 
-zbwDevice_exe-objs += zbwDevice.o
-zbwDevice_exe-objs += memory.o
+obj-m += data_size_ker.o 
+
 
 CROSS_COMPILE=/home/zbw/Desktop/aarch64-linux-gnu/bin/aarch64-linux-gnu-
 CROSS_COMPILE_ARM32=/home/zbw/Desktop/arm-linux-gnueabi/bin/arm-linux-gnueabi-

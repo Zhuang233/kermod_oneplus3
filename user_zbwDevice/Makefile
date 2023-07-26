@@ -1,6 +1,6 @@
 CC := /home/zbw/Desktop/aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
 CFLAGS := -g
-TARGET := test
+TARGET := main
 SRCS := $(wildcard *.c)
 OBJS := $(patsubst %c,%o,$(SRCS))
 all:$(TARGET)

@@ -25,7 +25,7 @@ int pid = -1;
 struct pid_addr pid_addr;
 
 
-int main(){
+int main3(){
     // char string_buf[1024] = "zbw origin data";
     char* ptr;
     posix_memalign((void **)&ptr, 4096, 4096);

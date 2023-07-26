@@ -3,14 +3,24 @@
 #include <linux/miscdevice.h>
 #include <linux/fs.h>
 
+#include "memory.h"
+
 #define DEVICE_NAME "zbwDevice"// 自定义设备名
+#define MAGIC 0x5c //8bit
+
+enum op_num{
+    op1,
+    op2,
+    op3,
+    op4
+};
 
 // 自定义设备ioctl命令
 enum OPERATIONS {
-    OP_TEST_FUN1 = 0x800,
-    OP_TEST_FUN2 = 0x801,
-    OP_TEST_FUN3 = 0x802,
-    OP_TEST_FUN4 = 0x803,
+    READ_PROC_MEM = _IOWR(MAGIC,op1,int),
+    OP_TEST_FUN2 = _IOWR(MAGIC,op2,int),
+    OP_TEST_FUN3 = _IOWR(MAGIC,op3,int),
+    OP_TEST_FUN4 = _IOWR(MAGIC,op4,int),
 };
 
 // 设备open函数(空实现)
@@ -28,6 +38,16 @@ int close_call_back(struct inode *node, struct file *file)
 // 设备ioctl函数(接收指定命令)
 long ioctl_call_back(struct file* const file, unsigned int const cmd, unsigned long const arg)
 {
+    switch (cmd)
+    {
+    case READ_PROC_MEM:
+        read_proc_mem(arg);
+        break;
+    
+    default:
+        break;
+    }
+    
     return 0;
 }
 
