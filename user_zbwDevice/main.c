@@ -18,7 +18,7 @@ enum op_num{
 // 自定义设备ioctl命令
 enum OPERATIONS {
     READ_PROC_MEM = _IOWR(MAGIC,op1,int),
-    OP_TEST_FUN2 = _IOWR(MAGIC,op2,int),
+    OP_TEST_BP = _IOWR(MAGIC,op2,int),
     OP_TEST_FUN3 = _IOWR(MAGIC,op3,int),
     OP_TEST_FUN4 = _IOWR(MAGIC,op4,int),
 };
@@ -32,13 +32,11 @@ typedef struct
 }memread_t;
 
 
-memread_t memread;
+int test_memory(){
+    memread_t memread;
+    unsigned char buf_read[1024] = {0};   
 
-unsigned char buf_read[1024] = {0};
-
-int main(){
     printf("size of memread_t:%d\n",sizeof(memread));
-
     int fd = 0;
     fd = open(DEVICE_NAME, O_RDONLY);
     if (fd == -1) {
@@ -66,3 +64,34 @@ int main(){
 
     close(fd);
 }
+
+void test_break_point(){
+    memread_t memread;
+    int fd = 0;
+    fd = open(DEVICE_NAME, O_RDONLY);
+    if (fd == -1) {
+        printf("[-] open driver failed!!!\n");
+        return;
+    }
+    else{
+        printf("[+] open driver sucess\n");
+    }
+
+    printf("input pid addr\n");
+    scanf("%d %d", &memread.pid, &memread.addr);
+    memread.buf_read_addr = NULL;
+    memread.size = 0;
+
+    if(ioctl(fd, OP_TEST_BP, &memread) != 0) {
+        printf("ioctl err\n");
+        return;
+    }
+    printf("regist success\n");
+}
+
+int main(){
+    // test_memory();
+    test_break_point();
+    return 0;
+}
+

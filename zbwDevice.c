@@ -4,6 +4,7 @@
 #include <linux/fs.h>
 
 #include "memory.h"
+#include "breakpoint.h"
 
 #define DEVICE_NAME "zbwDevice"// 自定义设备名
 #define MAGIC 0x5c //8bit
@@ -18,7 +19,7 @@ enum op_num{
 // 自定义设备ioctl命令
 enum OPERATIONS {
     READ_PROC_MEM = _IOWR(MAGIC,op1,int),
-    OP_TEST_FUN2 = _IOWR(MAGIC,op2,int),
+    OP_TEST_BP = _IOWR(MAGIC,op2,int),
     OP_TEST_FUN3 = _IOWR(MAGIC,op3,int),
     OP_TEST_FUN4 = _IOWR(MAGIC,op4,int),
 };
@@ -42,6 +43,9 @@ long ioctl_call_back(struct file* const file, unsigned int const cmd, unsigned l
     {
     case READ_PROC_MEM:
         read_proc_mem(arg);
+        break;
+    case OP_TEST_BP:
+        test_break_point(arg);
         break;
     
     default:

@@ -7,6 +7,9 @@
         "data_type.h": "c",
         "slab.h": "c",
         "pgtable-types.h": "c",
-        "pgtable.h": "c"
+        "pgtable.h": "c",
+        "errno.h": "c",
+        "perf_event.h": "c",
+        "hw_breakpoint.h": "c"
     }
 }
