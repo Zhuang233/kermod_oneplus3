@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "highmem.h": "c",
+        "module.h": "c",
+        "stat.h": "c",
+        "time.h": "c",
+        "seqlock.h": "c",
+        "spinlock.h": "c",
+        "preempt.h": "c"
+    }
+}
